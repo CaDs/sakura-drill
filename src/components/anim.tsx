@@ -4,6 +4,7 @@
 import React, { useEffect } from 'react';
 import { StyleProp, ViewStyle } from 'react-native';
 import Animated, {
+  cancelAnimation,
   Easing,
   useAnimatedStyle,
   useSharedValue,
@@ -30,6 +31,10 @@ export function Pop({
   useEffect(() => {
     scale.value = withDelay(delay, withSequence(withTiming(1.08, { duration: 210 }), withTiming(1, { duration: 120 })));
     opacity.value = withDelay(delay, withTiming(1, { duration: 180 }));
+    return () => {
+      cancelAnimation(scale);
+      cancelAnimation(opacity);
+    };
   }, [delay, opacity, scale]);
   const anim = useAnimatedStyle(() => ({ opacity: opacity.value, transform: [{ scale: scale.value }] }));
   return <Animated.View style={[style, anim]}>{children}</Animated.View>;
@@ -55,6 +60,8 @@ export function Float({
       delay,
       withRepeat(withTiming(-distance, { duration, easing: Easing.inOut(Easing.ease) }), -1, true)
     );
+    // Stop the infinite loop when this Float unmounts so it doesn't keep running on the UI thread.
+    return () => cancelAnimation(y);
   }, [delay, distance, duration, y]);
   const anim = useAnimatedStyle(() => ({ transform: [{ translateY: y.value }] }));
   return <Animated.View style={[style, anim]}>{children}</Animated.View>;
@@ -94,6 +101,11 @@ export function FeedbackView({
         withTiming(0, { duration: 100 })
       );
     }
+    return () => {
+      cancelAnimation(scale);
+      cancelAnimation(rot);
+      cancelAnimation(tx);
+    };
   }, [feedback, rot, scale, tx]);
   const anim = useAnimatedStyle(() => ({
     transform: [{ translateX: tx.value }, { scale: scale.value }, { rotateZ: `${rot.value}deg` }],

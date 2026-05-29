@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import { Pressable, StyleProp, StyleSheet, ViewStyle } from 'react-native';
-import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import Animated, { cancelAnimation, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
 export function FlipCard({
   flipped,
@@ -20,6 +20,7 @@ export function FlipCard({
   const progress = useSharedValue(0);
   useEffect(() => {
     progress.value = withTiming(flipped ? 1 : 0, { duration: 550 });
+    return () => cancelAnimation(progress);
   }, [flipped, progress]);
 
   const frontStyle = useAnimatedStyle(() => ({

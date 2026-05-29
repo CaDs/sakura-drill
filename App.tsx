@@ -64,11 +64,17 @@ function Navigator() {
 }
 
 export default function App() {
-  const [fontsLoaded] = useFonts({
+  const [fontsLoaded, fontError] = useFonts({
     MPLUSRounded1c_400Regular,
     MPLUSRounded1c_700Bold,
     MPLUSRounded1c_900Black,
   });
+
+  // If fonts fail to load, fall back to the system font rather than hanging on the splash forever.
+  React.useEffect(() => {
+    if (fontError) console.warn('Font load failed, using system font:', fontError);
+  }, [fontError]);
+  const fontsReady = fontsLoaded || !!fontError;
 
   return (
     <SafeAreaProvider>
@@ -78,7 +84,7 @@ export default function App() {
           <ProfileProvider>
             <SoundProvider>
               <NavigationContainer theme={navTheme}>
-                {fontsLoaded ? <Navigator /> : <Loading />}
+                {fontsReady ? <Navigator /> : <Loading />}
               </NavigationContainer>
             </SoundProvider>
           </ProfileProvider>

@@ -3,9 +3,9 @@
 // Pressing sinks the face onto the edge.
 
 import { LinearGradient } from 'expo-linear-gradient';
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { GestureResponderEvent, Pressable, StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
-import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import Animated, { cancelAnimation, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
 interface ChunkyButtonProps {
   onPress?: (e: GestureResponderEvent) => void;
@@ -45,6 +45,8 @@ export function ChunkyButton({
   const onOut = useCallback(() => {
     pressed.value = withTiming(0, { duration: 90 });
   }, [pressed]);
+  // Cancel any in-flight press animation if the button unmounts mid-press.
+  useEffect(() => () => cancelAnimation(pressed), [pressed]);
 
   const faceAnim = useAnimatedStyle(() => ({ transform: [{ translateY: pressed.value * depth }] }));
 
