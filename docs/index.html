@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>さくらドリル サポート / Sakura Drill Support</title>
+  <meta name="description" content="さくらドリルのサポートページ。よくある質問とお問い合わせ先。Support page for Sakura Drill." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --pink: #E91E63;
+      --pink-light: #F06292;
+      --text: #333;
+      --subtext: #666;
+      --card: #ffffff;
+      --border: #FFE0EC;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'M PLUS Rounded 1c', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--text);
+      background: linear-gradient(160deg, #FFF9C4 0%, #FCE4EC 50%, #E8EAF6 100%);
+      background-attachment: fixed;
+      line-height: 1.8;
+      padding: 24px 16px 64px;
+    }
+    .wrap { max-width: 720px; margin: 0 auto; }
+    header { text-align: center; padding: 24px 0 8px; }
+    header .emoji { font-size: 56px; }
+    h1 { font-weight: 900; font-size: 28px; margin: 8px 0 4px; color: var(--pink); }
+    .tagline { color: var(--subtext); font-weight: 700; margin: 0; }
+    .card {
+      background: var(--card);
+      border: 3px solid var(--border);
+      border-radius: 24px;
+      padding: 24px 28px;
+      margin: 20px 0;
+      box-shadow: 0 8px 24px rgba(233, 30, 99, 0.08);
+    }
+    h2 { font-weight: 900; font-size: 20px; color: var(--pink); margin: 0 0 12px; }
+    h3 { font-weight: 700; font-size: 16px; margin: 20px 0 4px; color: var(--text); }
+    p { margin: 6px 0; color: var(--subtext); }
+    a { color: var(--pink); font-weight: 700; }
+    .contact-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--pink), var(--pink-light));
+      color: #fff !important;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 16px;
+      font-weight: 900;
+      margin-top: 8px;
+    }
+    .lang { font-size: 12px; font-weight: 700; color: #aaa; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+    .divider { height: 1px; background: var(--border); border: 0; margin: 28px 0; }
+    footer { text-align: center; color: #aaa; font-size: 13px; margin-top: 32px; }
+    footer a { color: #999; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="emoji">🌸</div>
+      <h1>さくらドリル</h1>
+      <p class="tagline">たのしく学べる幼児の知育ドリル · A playful learning app for kids</p>
+    </header>
+
+    <!-- Contact -->
+    <div class="card">
+      <h2>お問い合わせ / Contact</h2>
+      <p class="lang">日本語</p>
+      <p>ご質問・ご要望・不具合のご報告は、下記メールアドレスまでお気軽にご連絡ください。通常2〜3営業日以内にご返信いたします。</p>
+      <p class="lang">English</p>
+      <p>For questions, feedback, or bug reports, please email us. We typically reply within 2–3 business days.</p>
+      <p><a class="contact-btn" href="mailto:dev@gamecanvas.ai?subject=Sakura%20Drill%20Support">dev@gamecanvas.ai</a></p>
+    </div>
+
+    <!-- FAQ -->
+    <div class="card">
+      <h2>よくある質問 / FAQ</h2>
+
+      <h3>なまえを かえるには？ / How do I change the child's name?</h3>
+      <p>ホーム画面の「なまえを かえる」ボタンをタップして、あたらしいなまえを入力してください。<br />
+      Tap “なまえを かえる” (Change name) on the home screen and enter a new name.</p>
+
+      <h3>スタンプや きろくを リセットするには？ / How do I reset progress?</h3>
+      <p>ホーム画面の「⚙️ せってい」を開き、「すべての データを けす」をタップしてください。なまえとスタンプがすべて消去されます（この操作は元に戻せません）。<br />
+      Open “⚙️ せってい” (Settings) from the home screen and tap “すべての データを けす” (Erase all data). This clears the name and all stamps and cannot be undone.</p>
+
+      <h3>インターネット接続は必要ですか？ / Does it need an internet connection?</h3>
+      <p>いいえ。すべての機能がオフラインで動作します。<br />
+      No. The app works completely offline.</p>
+
+      <h3>広告やアプリ内課金はありますか？ / Are there ads or in-app purchases?</h3>
+      <p>ありません。広告・アプリ内課金は一切ありません。<br />
+      No. There are no ads and no in-app purchases.</p>
+
+      <h3>対象年齢は？ / What ages is it for?</h3>
+      <p>3〜8さいのお子さま向けです。<br />
+      Designed for children ages 3–8.</p>
+
+      <h3>個人情報やデータはどう扱われますか？ / How is my data handled?</h3>
+      <p>当アプリは個人情報を一切収集しません。なまえとスタンプは端末内にのみ保存されます。詳しくは
+      <a href="./privacy.html">プライバシーポリシー</a> をご覧ください。<br />
+      The app collects no personal data. See our <a href="./privacy.html">Privacy Policy</a>.</p>
+    </div>
+
+    <footer>
+      <p><a href="./privacy.html">プライバシーポリシー / Privacy Policy</a></p>
+      <p>© 2026 GameCanvas</p>
+    </footer>
+  </div>
+</body>
+</html>
