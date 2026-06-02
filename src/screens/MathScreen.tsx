@@ -203,7 +203,7 @@ export function MathScreen({ navigation }: ScreenProps<'Math'>) {
 
   // ---- Play ----
   const isSub = current.op === '－';
-  const showDots = current.a <= 10 && current.b <= 10 && current.missing === 'c' && current.format === 'normal';
+  const showDots = current.missing === 'c' && current.format === 'normal';
   const [dotEmoji, dotEmojiB] = FRUIT_PAIRS[levelDef.id % FRUIT_PAIRS.length];
 
   const DotRow = ({ n, em }: { n: number; em: string }) => (

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 import { useSound } from '../audio/SoundProvider';
 import { FeedbackView, Float, Pop } from '../components/anim';
@@ -40,6 +40,13 @@ export function NazoScreen({ navigation }: ScreenProps<'Nazo'>) {
     }
   }, []);
   useEffect(() => () => clearTimer(), [clearTimer]);
+
+  // Shuffle the answer buttons once per question (data has the answer at choices[0]).
+  // Keyed on the riddle so feedback re-renders don't reshuffle and make buttons jump.
+  const shuffledChoices = useMemo(() => {
+    const r = activeRiddles[idx];
+    return r ? [...r.choices].sort(() => Math.random() - 0.5) : [];
+  }, [activeRiddles, idx]);
 
   const startGroup = useCallback((g: NazoGroup) => {
     clearTimer();
@@ -229,7 +236,7 @@ export function NazoScreen({ navigation }: ScreenProps<'Nazo'>) {
         </FeedbackView>
 
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', rowGap: 12 }}>
-          {riddle.choices.map((choice) => {
+          {shuffledChoices.map((choice) => {
             const isSel = selectedAns === choice;
             let bg = 'white';
             let bd = '#e0e0e0';

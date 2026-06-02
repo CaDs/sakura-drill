@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import { useSound } from '../audio/SoundProvider';
 import { FeedbackView, Float, Pop } from '../components/anim';
@@ -69,6 +69,13 @@ export function KokugoScreen({ navigation }: ScreenProps<'Kokugo'>) {
     }
   }, []);
   useEffect(() => () => clearTimer(), [clearTimer]);
+
+  // Shuffle the quiz answer buttons once per card (data has the answer at choices[0]).
+  // Keyed on the card so feedback re-renders don't reshuffle. Flash cards have no choices.
+  const shuffledChoices = useMemo(() => {
+    const c = activeCards[idx] as QuizCard | undefined;
+    return c && Array.isArray(c.choices) ? [...c.choices].sort(() => Math.random() - 0.5) : [];
+  }, [activeCards, idx]);
 
   const resetTopic = useCallback((cardList: KokugoCard[]) => {
     if (!cardList || cardList.length === 0) return;
@@ -316,7 +323,7 @@ export function KokugoScreen({ navigation }: ScreenProps<'Kokugo'>) {
         </FeedbackView>
 
         <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', rowGap: 12 }}>
-          {q.choices.map((choice) => {
+          {shuffledChoices.map((choice) => {
             const isSel = selectedAns === choice;
             let bg = 'white';
             let bd = '#e0e0e0';
